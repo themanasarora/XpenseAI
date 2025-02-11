@@ -1,10 +1,20 @@
 import { AppRegistry } from 'react-native';
 import { View, Text, TextInput, Button, FlatList, StyleSheet } from 'react-native';
-import { useState } from 'react';
-import NavigationBar from '@/components/NavigationBar';
-import BottomNav from '@/components/BottomNav'
+import { useState, useEffect } from 'react';
+import { useRouter} from 'expo-router'
+import { NavigationContainer } from "@react-navigation/native";
+import TabNavigator from "./TabNavigator";
+
 
 const App = () => {
+
+  const router= useRouter();
+  useEffect(()=>{
+    setTimeout(()=>{
+    router.push('/(tabs)/TabNavigator')
+  },1000);
+  },[])
+
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState('');
   const [expenses, setExpenses] = useState([]);
@@ -45,7 +55,9 @@ const App = () => {
           <Text style={styles.item}>{item.title}: ${item.amount.toFixed(2)}</Text>
         )} 
       />
-      <NavigationBar/>
+  
+      <TabNavigator />
+ 
     </View>
   );
 };
